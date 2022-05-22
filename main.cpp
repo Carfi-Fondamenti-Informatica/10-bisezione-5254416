@@ -1,38 +1,65 @@
 #include <iostream>
-#include <math.h>
+#include <cmath>
 using namespace std;
 
-float f(float n){
-    float y;
-    y= (pow(n,2))*(cos(n))+1;
-    return y;
+bool controllo(float a)
+{
+    double fa;
+    fa=pow(a,2)*cos(a)+1;
+    if(fa==0) {
+        return true;
+    }
+    return false;
+}
+bool funz(float a,float b)
+{
+float fa,fb;
+fa=pow(a,2)*cos(a)+1;
+fb=pow(b,2)*cos(b)+1;
+if((fa*fb)<0)
+    {
+    return true;
+    }
+return false;
+}
+int main() {
+   int c;
+    float a,b,x;
+    while(!funz(a,b)){
+        cout << "inserire estremi" << endl;
+        cin >> a >> b;
+    }
+while(true) {
+    x = (a + b) / 2;
+    if (controllo(x)) {
+        x=x*10000;
+        c=x;
+        x=c;
+        cout << x/10000 << endl;
+        return 0;
+    }
+    else
+    {
+    if(funz(a,x))
+    {
+     b=x;
+    }
+    else if(funz(x,b))
+    {
+    a=x;
+    }
+    if(abs((b-a)/2)<1*pow(10,-6))
+    {
+        x=x*10000;
+        c=x;
+        x=c;
+        cout << x/10000 << endl;
+        return 0;
+    }
+    }
 }
 
-int main(){
-    float a,b,x;
-
-    while(f(a)*f(b)>=0 || a>b){
-        cout<<"inserire estremi"<<endl;
-        cin>>a;
-        cin>>b;
-    }
-
-    float err;
-
-    while(err > 1e-6){
-        x=(a+b)/2;
-        if(f(x)==0.0){
-            break ;
-        }
-        else if(f(a)*f(x)>0){
-            a=x;
-        }else{
-            b=x;
-        }
-        err=abs((b-a)/2);
-    }
-
-    cout<<int(x*10000)/10000.0<<endl;
+}
 
     return 0;
 }
